@@ -92,6 +92,7 @@ int main(void)
   // MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
   MX_USB_DEVICE_Init();
+  DWT_Dalay_Init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

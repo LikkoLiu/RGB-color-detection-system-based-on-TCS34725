@@ -136,18 +136,18 @@ void MX_FREERTOS_Init(void)
 void LedFlashTask(void const *argument)
 {
   /* init code for USB_DEVICE */
-  if(TCS34725_Init())
-    t=10;
-  else{
-    t=20;
+  {
+    vTaskSuspendAll();
+    if (TCS34725_Init())
+      t = 10;
+    xTaskResumeAll();
   }
-    
   /* USER CODE BEGIN LedFlashTask */
   /* Infinite loop */
   for (;;)
   {
     HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
-    
+
     TCS34725_GetRawData(&rgb);
     osDelay(100);
   }
@@ -184,7 +184,11 @@ void LcdDisplayTask(void const *argument)
 {
   /* USER CODE BEGIN LcdDisplayTask */
   uint8_t i, j;
-  LCD_Init();
+  {
+    vTaskSuspendAll();
+    LCD_Init();
+    xTaskResumeAll();
+  }
   LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
   /* Infinite loop */
   for (;;)

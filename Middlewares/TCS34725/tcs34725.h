@@ -103,5 +103,7 @@ void TCS34725_I2C_Init();
 uint8_t TCS34725_Init();
 void TCS34725_Read();
 uint8_t TCS34725_GetRawData();
+uint32_t DWT_Dalay_Init();
+void DWT_Delay_us();
 
 #endif

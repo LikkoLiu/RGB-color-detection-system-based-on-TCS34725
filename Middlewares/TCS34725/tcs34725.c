@@ -3,6 +3,37 @@
 COLOR_RGBC rgb;
 COLOR_HSL  hsl;
 
+//初始化函数
+
+uint32_t DWT_Dalay_Init(void)
+{
+    CoreDebug->DEMCR &= ~CoreDebug_DEMCR_TRCENA_Msk;
+    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+    DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
+    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+    DWT->CYCCNT = 0;
+    __ASM volatile ("NOP");
+    __ASM volatile ("NOP");
+    __ASM volatile ("NOP");
+
+    if(DWT->CYCCNT)
+    {
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+
+//延时函数,参数是n微秒
+void DWT_Delay_us(volatile uint32_t nus)
+{
+    uint32_t clk_cycle_start = DWT->CYCCNT;  // 获得当前次数
+    nus *= 72; // 72MHZ时，1us的时钟脉冲为72，1us计数72次，nus则是nus *= 72
+
+    while((DWT->CYCCNT - clk_cycle_start < nus));  // 当计数次数达到预期时，跳出循环
+}
+
 void TCS34725_I2C_Init()
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -20,9 +51,9 @@ void TCS34725_I2C_Start()
 	TCS_SDA_OUT();
 	TCS_SDA_H;
 	TCS_SCL_H;
-	osDelay(4);//delay_us(4);
+	DWT_Delay_us(4);//delay_us(4);
 	TCS_SDA_L;
-	osDelay(4);//delay_us(4);
+	DWT_Delay_us(4);//delay_us(4);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -31,10 +62,10 @@ void TCS34725_I2C_Stop()
 	TCS_SDA_OUT();
 	TCS_SCL_L;
 	TCS_SDA_L;
-	osDelay(4);//delay_us(4);
+	DWT_Delay_us(4);//delay_us(4);
 	TCS_SCL_H;
 	TCS_SDA_H;
-	osDelay(4);//delay_us(4);							   	
+	DWT_Delay_us(4);//delay_us(4);							   	
 }
 /*********************************************/
 //返回值：1，接收应答失败
@@ -45,9 +76,9 @@ uint8_t TCS34725_I2C_Wait_ACK()
 	
 	TCS_SDA_IN();//SDA设置为输入  
 	TCS_SDA_H; 
-	osDelay(1);//delay_us(1);
+	DWT_Delay_us(1);//delay_us(1);
 	TCS_SCL_H; 
-	osDelay(1);//delay_us(1);
+	DWT_Delay_us(1);//delay_us(1);
 	while(TCS_SDA_READ)
 	{
 		t++;
@@ -67,9 +98,9 @@ void TCS34725_I2C_ACK()
 	TCS_SCL_L;
 	TCS_SDA_OUT();//sda线输出
 	TCS_SDA_L;
-	osDelay(2);//delay_us(2);
+	DWT_Delay_us(2);//delay_us(2);
 	TCS_SCL_H;
-	osDelay(2);//delay_us(2);
+	DWT_Delay_us(2);//delay_us(2);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -79,9 +110,9 @@ void TCS34725_I2C_NACK()
 	TCS_SCL_L;
 	TCS_SDA_OUT();//sda线输出
 	TCS_SDA_H;
-	osDelay(2);//delay_us(2);
+	DWT_Delay_us(2);//delay_us(2);
 	TCS_SCL_H;
-	osDelay(2);//delay_us(2);
+	DWT_Delay_us(2);//delay_us(2);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -99,11 +130,11 @@ void TCS34725_I2C_Send_Byte(uint8_t byte)
 			TCS_SDA_L;
 		byte <<= 1;
 		
-		osDelay(2);//delay_us(2);
+		DWT_Delay_us(2);//delay_us(2);
 		TCS_SCL_H;
-		osDelay(2);//delay_us(2);
+		DWT_Delay_us(2);//delay_us(2);
 		TCS_SCL_L;
-		osDelay(2);//delay_us(2);
+		DWT_Delay_us(2);//delay_us(2);
 	} 
 }
 /*********************************************/
@@ -116,11 +147,11 @@ uint8_t TCS34725_I2C_Read_Byte(uint8_t ack)
 	for(i = 0; i < 8; i++)
 	{
 		TCS_SCL_L;
-		osDelay(2);//delay_us(2);
+		DWT_Delay_us(2);//delay_us(2);
 		TCS_SCL_H;
 		receive <<= 1;
 		if(TCS_SDA_READ) receive++;
-		osDelay(1);//delay_us(1);
+		DWT_Delay_us(1);//delay_us(1);
 	}
 	if (!ack) TCS34725_I2C_NACK();//发送nACK
 	else TCS34725_I2C_ACK(); //发送ACK 
