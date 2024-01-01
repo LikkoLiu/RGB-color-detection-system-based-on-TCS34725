@@ -20,9 +20,9 @@ void TCS34725_I2C_Start()
 	TCS_SDA_OUT();
 	TCS_SDA_H;
 	TCS_SCL_H;
-	osDelay(40);//delay_us(4);
+	osDelay(4);//delay_us(4);
 	TCS_SDA_L;
-	osDelay(40);//delay_us(4);
+	osDelay(4);//delay_us(4);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -31,10 +31,10 @@ void TCS34725_I2C_Stop()
 	TCS_SDA_OUT();
 	TCS_SCL_L;
 	TCS_SDA_L;
-	osDelay(40);//delay_us(4);
+	osDelay(4);//delay_us(4);
 	TCS_SCL_H;
 	TCS_SDA_H;
-	osDelay(40);//delay_us(4);							   	
+	osDelay(4);//delay_us(4);							   	
 }
 /*********************************************/
 //返回值：1，接收应答失败
@@ -45,9 +45,9 @@ uint8_t TCS34725_I2C_Wait_ACK()
 	
 	TCS_SDA_IN();//SDA设置为输入  
 	TCS_SDA_H; 
-	osDelay(10);//delay_us(1);
+	osDelay(1);//delay_us(1);
 	TCS_SCL_H; 
-	osDelay(10);//delay_us(1);
+	osDelay(1);//delay_us(1);
 	while(TCS_SDA_READ)
 	{
 		t++;
@@ -67,9 +67,9 @@ void TCS34725_I2C_ACK()
 	TCS_SCL_L;
 	TCS_SDA_OUT();//sda线输出
 	TCS_SDA_L;
-	osDelay(20);//delay_us(2);
+	osDelay(2);//delay_us(2);
 	TCS_SCL_H;
-	osDelay(20);//delay_us(2);
+	osDelay(2);//delay_us(2);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -79,9 +79,9 @@ void TCS34725_I2C_NACK()
 	TCS_SCL_L;
 	TCS_SDA_OUT();//sda线输出
 	TCS_SDA_H;
-	osDelay(20);//delay_us(2);
+	osDelay(2);//delay_us(2);
 	TCS_SCL_H;
-	osDelay(20);//delay_us(2);
+	osDelay(2);//delay_us(2);
 	TCS_SCL_L;
 }
 /*********************************************/
@@ -99,11 +99,11 @@ void TCS34725_I2C_Send_Byte(uint8_t byte)
 			TCS_SDA_L;
 		byte <<= 1;
 		
-		osDelay(20);//delay_us(2);
+		osDelay(2);//delay_us(2);
 		TCS_SCL_H;
-		osDelay(20);//delay_us(2);
+		osDelay(2);//delay_us(2);
 		TCS_SCL_L;
-		osDelay(20);//delay_us(2);
+		osDelay(2);//delay_us(2);
 	} 
 }
 /*********************************************/
@@ -116,11 +116,11 @@ uint8_t TCS34725_I2C_Read_Byte(uint8_t ack)
 	for(i = 0; i < 8; i++)
 	{
 		TCS_SCL_L;
-		osDelay(20);//delay_us(2);
+		osDelay(2);//delay_us(2);
 		TCS_SCL_H;
 		receive <<= 1;
 		if(TCS_SDA_READ) receive++;
-		osDelay(10);//delay_us(1);
+		osDelay(1);//delay_us(1);
 	}
 	if (!ack) TCS34725_I2C_NACK();//发送nACK
 	else TCS34725_I2C_ACK(); //发送ACK 

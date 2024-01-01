@@ -74,12 +74,14 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
     GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    // GPIO_ForcePullUpConfig(GPIOB, GPIO_PIN_8);  // PB8上拉
+    // GPIO_ForcePullUpConfig(GPIOB, GPIO_PIN_9);  // PB9上拉
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* I2C2 clock enable */
     __HAL_RCC_I2C2_CLK_ENABLE();
   /* USER CODE BEGIN I2C2_MspInit 1 */
-
+    HAL_GPIO_WritePin(GPIOB,GPIO_PIN_10|GPIO_PIN_11,GPIO_PIN_SET);   //高电平
   /* USER CODE END I2C2_MspInit 1 */
   }
 }
