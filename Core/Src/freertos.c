@@ -187,31 +187,36 @@ void LcdDisplayTask(void const *argument)
   {
     vTaskSuspendAll();
     LCD_Init();
+    lv_init();
+	  lv_port_disp_init();
     xTaskResumeAll();
   }
-  LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
+  // LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
+  lv_ex_label();
   /* Infinite loop */
   for (;;)
   {
-    LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
-    LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
-    LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
-    LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
-    LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(128, 90, t, 3, RED, WHITE, 16);
+    // LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
+    // LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
+    // LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
+    // LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
+    // LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(128, 90, t, 3, RED, WHITE, 16);
 
-    for (j = 0; j < 3; j++)
-    {
-      for (i = 0; i < 6; i++)
-      {
-        LCD_ShowPicture(40 * i, 120 + j * 40, 40, 40, gImage_1);
-      }
-    }
-    osDelay(100);
+    // for (j = 0; j < 3; j++)
+    // {
+    //   for (i = 0; i < 6; i++)
+    //   {
+    //     LCD_ShowPicture(40 * i, 120 + j * 40, 40, 40, gImage_1);
+    //   }
+    // }
+
+    lv_task_handler();
+    osDelay(20);
   }
   /* USER CODE END LcdDisplayTask */
 }

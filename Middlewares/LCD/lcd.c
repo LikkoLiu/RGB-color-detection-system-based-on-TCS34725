@@ -26,6 +26,23 @@ void LCD_Fill(uint16_t xsta,uint16_t ysta,uint16_t xend,uint16_t yend,uint16_t c
 	} 					  	    
 }
 
+void lvgl_LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, lv_color_t *color)
+{
+
+	uint32_t y=0; 
+	uint16_t height, width;
+	width = ex - sx + 1;            //得到填充的宽度
+    height = ey - sy + 1;           //高度
+	
+	LCD_Address_Set(sx,sy,ex,ey);
+	
+	for(y = 0; y <width*height; y++) 
+	{
+		LCD_WR_DATA(color->full);
+		color++;
+  }
+}
+
 /******************************************************************************
       函数说明：在指定位置画点
       入口数据：x,y 画点坐标
@@ -555,6 +572,24 @@ void LCD_ShowPicture(uint16_t x,uint16_t y,uint16_t length,uint16_t width,const 
 			k++;
 		}
 	}			
+}
+
+void lv_ex_label(void)
+{
+		char* github_addr = "https://gitee.com/W23";
+		lv_obj_t * label = lv_label_create(lv_scr_act());
+    lv_label_set_recolor(label, true);
+    lv_label_set_long_mode(label, LV_LABEL_LONG_SCROLL_CIRCULAR); /*Circular scroll*/
+    lv_obj_set_width(label, 120);
+    lv_label_set_text_fmt(label, "#ff0000 Gitee: %s#", github_addr);
+    lv_obj_align(label, LV_ALIGN_CENTER, 0, 10);
+	
+    lv_obj_t * label2 = lv_label_create(lv_scr_act());
+    lv_label_set_recolor(label2, true);
+    lv_label_set_long_mode(label2, LV_LABEL_LONG_SCROLL_CIRCULAR); /*Circular scroll*/
+    lv_obj_set_width(label2, 120);
+    lv_label_set_text_fmt(label2, "#ff0000 Hello# #0000ff world !123456789#");
+    lv_obj_align(label2, LV_ALIGN_CENTER, 0, -10);
 }
 
 

@@ -33,6 +33,8 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "lcd_init.h"
 #include "lcd.h"
+#include "lvgl.h" 
+#include "lv_port_disp_template.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

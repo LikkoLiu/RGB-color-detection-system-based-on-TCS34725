@@ -3,6 +3,7 @@
 // #include "sys.h"
 #include "cmsis_os.h"
 #include "main.h"
+#include "lvgl.h"
 
 
 void LCD_Fill(uint16_t xsta,uint16_t ysta,uint16_t xend,uint16_t yend,uint16_t color);//ָ�����������ɫ
@@ -25,6 +26,8 @@ void LCD_ShowFloatNum1(uint16_t x,uint16_t y,float num,uint8_t len,uint16_t fc,u
 
 void LCD_ShowPicture(uint16_t x,uint16_t y,uint16_t length,uint16_t width,const uint8_t pic[]);//��ʾͼƬ
 
+void lvgl_LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, lv_color_t *color);
+void lv_ex_label(void);
 
 //������ɫ
 #define WHITE         	 0xFFFF
