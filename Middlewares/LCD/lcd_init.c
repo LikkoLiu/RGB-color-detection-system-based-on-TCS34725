@@ -129,16 +129,16 @@ void LCD_Init(void)
 	LCD_GPIO_Init(); // 初始化GPIO
 
 	LCD_RES_Clr(); // 复位
-	osDelay(100);
+	DWT_Delay_us(100);
 	LCD_RES_Set();
-	osDelay(100);
+	DWT_Delay_us(100);
 
 	LCD_BLK_Set(); // 打开背光
-	osDelay(100);
+	DWT_Delay_us(100);
 
 	//************* Start Initial Sequence **********//
 	LCD_WR_REG(0x11); // Sleep out
-	osDelay(120);	  // Delay 120ms
+	DWT_Delay_us(120);	  // Delay 120ms
 	//************* Start Initial Sequence **********//
 	LCD_WR_REG(0x36);
 	if (USE_HORIZONTAL == 0)

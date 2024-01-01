@@ -203,7 +203,7 @@ void LcdDisplayTask(void const *argument)
     LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
     LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
     LCD_ShowIntNum(128, 90, t, 3, RED, WHITE, 16);
-    // t += 0.11;
+
     for (j = 0; j < 3; j++)
     {
       for (i = 0; i < 6; i++)
