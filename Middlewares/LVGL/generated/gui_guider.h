@@ -28,10 +28,14 @@ typedef struct
 	lv_obj_t *screen_line_3;
 	lv_obj_t *screen_bar_4;
 	lv_obj_t *screen_spangroup_3;
-	lv_obj_t *screen_table_1;
-	lv_obj_t *screen_table_2;
-	lv_obj_t *screen_table_3;
+	lv_obj_t *screen_RGB_R_Value;
+	lv_obj_t *screen_RGB_G_Value;
+	lv_obj_t *screen_RGB_B_Value;
 	lv_obj_t *screen_bar_2;
+	lv_obj_t *screen_Clear_Value;
+	lv_obj_t *screen_spangroup_4;
+	lv_obj_t *screen_spangroup_5;
+	lv_obj_t *screen_Gain_Value;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

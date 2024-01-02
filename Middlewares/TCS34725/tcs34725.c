@@ -2,6 +2,7 @@
 
 COLOR_RGBC rgb;
 COLOR_HSL  hsl;
+Window brightness_window;
 
 //初始化函数
 
@@ -314,8 +315,9 @@ uint8_t TCS34725_Init(void)
 	TCS34725_Read(TCS34725_ID, &id, 1);  //TCS34725 的 ID 是 0x44 可以根据这个来判断是否成功连接,0x4D是TCS34727;
 	if(id==0x4D | id==0x44)
 		{
-			TCS34725_SetIntegrationTime(TCS34725_INTEGRATIONTIME_50MS);
-			TCS34725_SetGain(TCS34725_GAIN_1X);
+			TCS34725_SetIntegrationTime(TCS34725_INTEGRATIONTIME_154MS);
+			TCS34725_SetGain(TCS34725_GAIN_60X);
+			brightness_window.gain = TCS34725_GAIN_60X;
 			TCS34725_Enable();
 			return 1;
 		}
@@ -331,7 +333,8 @@ uint16_t TCS34725_GetChannelData(uint8_t reg)
 	uint8_t tmp[2] = {0,0};
 	uint16_t data;
 	
-	TCS34725_Read(reg, tmp, 2);
+	TCS34725_Read(reg, &tmp[0], 1);
+	TCS34725_Read((reg+1), &tmp[1], 1);
 	data = (tmp[1] << 8) | tmp[0];
 	
 	return data;
@@ -354,6 +357,15 @@ uint8_t TCS34725_GetRawData(COLOR_RGBC *rgbc)
 		rgbc->r = TCS34725_GetChannelData(TCS34725_RDATAL);	
 		rgbc->g = TCS34725_GetChannelData(TCS34725_GDATAL);	
 		rgbc->b = TCS34725_GetChannelData(TCS34725_BDATAL);
+
+		rgbc->IR = (rgbc->b + rgbc->r + rgbc->g - rgbc->c)/2;
+		// rgbc->c = rgbc->c - rgbc->IR;	
+		// rgbc->r = rgbc->r - rgbc->IR;	
+		// rgbc->g = rgbc->g - rgbc->IR;	
+		// rgbc->b = rgbc->b - rgbc->IR;
+
+		// rgbc->Lux = (rgbc->r * 136 + rgbc->g * 1000 - rgbc->b * 444) / (50 / 310);
+		rgbc->Lux = (rgbc->r + rgbc->g + rgbc->b ) / 3;
 		return 1;
 	}
 	return 0;
@@ -401,6 +413,54 @@ void RGBtoHSL(COLOR_RGBC *Rgb, COLOR_HSL *Hsl)
 		else
 			Hsl->s=difVal*100/(200-(maxVal+minVal));
 	}
+}
+
+/******************************************************************************/
+//AGC
+
+void initialize_window(Window *window) {
+    for (int i = 0; i < WINDOW_SIZE; ++i) {
+        window->values[i] = 0;
+    }
+    window->index = 0;
+    window->sum = 0;
+}
+
+void update_window(Window *window, int value) {
+    window->sum -= window->values[window->index];
+    window->values[window->index] = value;
+    window->sum += value;
+    window->index = (window->index + 1) % WINDOW_SIZE;
+}
+
+int calculate_average(Window *window) {
+    return window->sum / WINDOW_SIZE;
+}
+
+uint8_t adjust_gain(COLOR_RGBC data, Window *brightness_window) {
+    // 计算当前亮度
+    // int current_brightness = (data.r + data.g + data.b) / 3;
+
+    // 更新滑动窗口平均
+    update_window(brightness_window, data.Lux);
+
+    // 计算滑动窗口平均亮度
+    uint16_t average_brightness = calculate_average(brightness_window);
+
+    // 如果当前亮度过低，增加增益
+    if (average_brightness < TARGET_brightness_Min && brightness_window->gain < 3) {
+        brightness_window->gain ++;
+		return  1;
+    }
+    // 如果当前亮度过高，减小增益
+    else if (((average_brightness > TARGET_brightness_Max) || (rgb.b > 9500) || (rgb.g > 9500) || (rgb.r > 9500)) && brightness_window->gain > 0) {
+        brightness_window->gain --;
+		return  1;
+    }
+    // 保持增益不变
+    else {
+        return 0;
+    }
 }
 /******************************************************************************/
 

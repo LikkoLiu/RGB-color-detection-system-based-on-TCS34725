@@ -82,11 +82,17 @@
 #define max3v(v1, v2, v3)   ((v1)<(v2)? ((v2)<(v3)?(v3):(v2)):((v1)<(v3)?(v3):(v1)))
 #define min3v(v1, v2, v3)   ((v1)>(v2)? ((v2)>(v3)?(v3):(v2)):((v1)>(v3)?(v3):(v1)))
 
+#define WINDOW_SIZE 3
+#define TARGET_brightness_Min  2000
+#define TARGET_brightness_Max  7000
+
 typedef struct{
-	unsigned short  c;      //[0-65536]
-	unsigned short  r;
-	unsigned short  g;
-	unsigned short  b;
+	uint16_t  c;      //[0-65536]
+	uint16_t  r;
+	uint16_t  g;
+	uint16_t  b;
+	uint16_t  IR;
+	uint16_t  Lux;
 }COLOR_RGBC;//RGBC
 
 typedef struct{
@@ -95,8 +101,16 @@ typedef struct{
 	uint8_t  l;       //[0,100]
 }COLOR_HSL;//HSL
 
+typedef struct {
+    uint16_t values[WINDOW_SIZE];
+    uint8_t index;
+    uint32_t sum;
+	uint8_t gain;
+} Window;
+
 extern COLOR_RGBC rgb;
 extern COLOR_HSL  hsl;
+extern Window brightness_window;
 /******************************************************************************/
 
 void TCS34725_I2C_Init();
@@ -105,5 +119,8 @@ void TCS34725_Read();
 uint8_t TCS34725_GetRawData();
 uint32_t DWT_Dalay_Init();
 void DWT_Delay_us();
+void initialize_window(Window *window);
+void update_window(Window *window, int value);
+uint8_t adjust_gain(COLOR_RGBC data, Window *brightness_window);
 
 #endif

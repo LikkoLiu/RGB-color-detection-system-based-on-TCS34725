@@ -12,69 +12,6 @@
 #include "lvgl.h"
 
 
-static void screen_table_1_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_VALUE_CHANGED:
-	{
-		lv_obj_add_state(guider_ui.screen_table_1, LV_STATE_EDITED);
-		break;
-	}
-	default:
-		break;
-	}
-}
-static void screen_table_2_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_VALUE_CHANGED:
-	{
-		lv_obj_add_state(guider_ui.screen_table_2, LV_STATE_EDITED);
-		break;
-	}
-	default:
-		break;
-	}
-}
-static void screen_table_3_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_VALUE_CHANGED:
-	{
-		lv_obj_add_state(guider_ui.screen_table_3, LV_STATE_EDITED);
-		break;
-	}
-	default:
-		break;
-	}
-}
-static void screen_bar_2_event_handler (lv_event_t *e)
-{
-	lv_event_code_t code = lv_event_get_code(e);
-
-	switch (code) {
-	case LV_EVENT_VALUE_CHANGED:
-	{
-		lv_obj_add_state(guider_ui.screen_bar_2, LV_STATE_EDITED);
-		break;
-	}
-	default:
-		break;
-	}
-}
-void events_init_screen(lv_ui *ui)
-{
-	lv_obj_add_event_cb(ui->screen_table_1, screen_table_1_event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_add_event_cb(ui->screen_table_2, screen_table_2_event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_add_event_cb(ui->screen_table_3, screen_table_3_event_handler, LV_EVENT_ALL, NULL);
-	lv_obj_add_event_cb(ui->screen_bar_2, screen_bar_2_event_handler, LV_EVENT_ALL, NULL);
-}
 
 void events_init(lv_ui *ui)
 {
