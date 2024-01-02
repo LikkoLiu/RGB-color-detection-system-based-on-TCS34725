@@ -51,7 +51,7 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_FLash_GPIO_Port, LED_FLash_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LED_FLash_GPIO_Port, LED_FLash_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = LED_FLash_Pin;

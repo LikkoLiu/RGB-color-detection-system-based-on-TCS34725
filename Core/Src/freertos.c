@@ -160,7 +160,7 @@ void LedFlashTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
-    HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
+    // HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
     TCS34725_GetRawData(&rgb);
     t += 1;
     osDelay(100);
@@ -212,20 +212,23 @@ void LcdDisplayTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
-    LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
-    LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
-    LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
-    LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
-    LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
-    LCD_ShowIntNum(108, 90, t, 3, RED, WHITE, 16);
+    // LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
+    // LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
+    // LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
+    // LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
+    // LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
+    LCD_ShowString(10, 210, "Init Status:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(108, 210, t, 3, RED, WHITE, 16);
 
     lv_table_set_cell_value_fmt(guider_ui.screen_table_1, 0, 0, "%d", rgb.r);
     lv_table_set_cell_value_fmt(guider_ui.screen_table_2, 0, 0, "%d", rgb.g);
     lv_table_set_cell_value_fmt(guider_ui.screen_table_3, 0, 0, "%d", rgb.b);
+    lv_bar_set_value(guider_ui.screen_bar_2, rgb.r, LV_ANIM_ON);
+    lv_bar_set_value(guider_ui.screen_bar_3, rgb.r, LV_ANIM_ON);
+    lv_bar_set_value(guider_ui.screen_bar_4, rgb.r, LV_ANIM_ON);
 
     // lv_tick_inc(LVGL_TICK);
     lv_task_handler();
