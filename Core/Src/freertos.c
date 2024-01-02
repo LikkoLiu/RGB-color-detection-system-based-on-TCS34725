@@ -32,7 +32,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+lv_ui guider_ui;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -47,12 +47,12 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-uint8_t t = 0;
+uint8_t t = 10;
 /* USER CODE END Variables */
 osThreadId LedFlashHandle;
 osThreadId UsbDeviceHandle;
 osThreadId LcdDisplayHandle;
-
+osThreadId LvTickHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 
@@ -61,6 +61,7 @@ osThreadId LcdDisplayHandle;
 void LedFlashTask(void const *argument);
 void UsbDeviceTask(void const *argument);
 void LcdDisplayTask(void const *argument);
+void LvTickTask(void const *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -110,7 +111,7 @@ void MX_FREERTOS_Init(void)
 
   /* Create the thread(s) */
   /* definition and creation of LedFlash */
-  osThreadDef(LedFlash, LedFlashTask, osPriorityBelowNormal, 0, 2048);
+  osThreadDef(LedFlash, LedFlashTask, osPriorityBelowNormal, 0, 1024);
   LedFlashHandle = osThreadCreate(osThread(LedFlash), NULL);
 
   /* definition and creation of UsbDevice */
@@ -118,11 +119,12 @@ void MX_FREERTOS_Init(void)
   UsbDeviceHandle = osThreadCreate(osThread(UsbDevice), NULL);
 
   /* definition and creation of LcdDisplay */
-  osThreadDef(LcdDisplay, LcdDisplayTask, osPriorityNormal, 0, 1536);
+  osThreadDef(LcdDisplay, LcdDisplayTask, osPriorityNormal, 0, 1024);
   LcdDisplayHandle = osThreadCreate(osThread(LcdDisplay), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+  osThreadDef(LvTick, LvTickTask, osPriorityNormal, 0, 256);
+  LvTickHandle = osThreadCreate(osThread(LvTick), NULL);
   /* USER CODE END RTOS_THREADS */
 }
 
@@ -132,6 +134,18 @@ void MX_FREERTOS_Init(void)
  * @param  argument: Not used
  * @retval None
  */
+void LvTickTask(void const *argument)
+{
+  /* init code for USB_DEVICE */
+  /* USER CODE BEGIN LedFlashTask */
+  /* Infinite loop */
+  for (;;)
+  {
+    lv_tick_inc(LVGL_TICK);
+    osDelay(LVGL_TICK);
+  }
+  /* USER CODE END LedFlashTask */
+}
 /* USER CODE END Header_LedFlashTask */
 void LedFlashTask(void const *argument)
 {
@@ -139,7 +153,7 @@ void LedFlashTask(void const *argument)
   {
     vTaskSuspendAll();
     if (TCS34725_Init())
-      t = 10;
+      t = 20;
     xTaskResumeAll();
   }
   /* USER CODE BEGIN LedFlashTask */
@@ -147,8 +161,8 @@ void LedFlashTask(void const *argument)
   for (;;)
   {
     HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
-
     TCS34725_GetRawData(&rgb);
+    t += 1;
     osDelay(100);
   }
   /* USER CODE END LedFlashTask */
@@ -183,40 +197,39 @@ void UsbDeviceTask(void const *argument)
 void LcdDisplayTask(void const *argument)
 {
   /* USER CODE BEGIN LcdDisplayTask */
-  uint8_t i, j;
   {
     vTaskSuspendAll();
     LCD_Init();
     lv_init();
-	  lv_port_disp_init();
+    lv_port_disp_init();
+    // lv_ex_label();
+    setup_ui(&guider_ui);
+    events_init(&guider_ui);
     xTaskResumeAll();
   }
   // LCD_Fill(0, 0, LCD_W, LCD_H, WHITE);
-  lv_ex_label();
+
   /* Infinite loop */
   for (;;)
   {
-    // LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
-    // LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
-    // LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
-    // LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
-    // LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
-    // LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
-    // LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
-    // LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
-    // LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
-    // LCD_ShowIntNum(128, 90, t, 3, RED, WHITE, 16);
+    LCD_ShowString(10, 30, "RGB_R:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(58, 30, rgb.r, 3, RED, WHITE, 16);
+    LCD_ShowString(90, 30, "RGB_G:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(138, 30, rgb.g, 3, RED, WHITE, 16);
+    LCD_ShowString(10, 60, "RGB_B:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(58, 60, rgb.b, 3, RED, WHITE, 16);
+    LCD_ShowString(90, 60, "RGB_C:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(138, 60, rgb.c, 3, RED, WHITE, 16);
+    LCD_ShowString(10, 90, "Init Status:", RED, WHITE, 16, 0);
+    LCD_ShowIntNum(108, 90, t, 3, RED, WHITE, 16);
 
-    // for (j = 0; j < 3; j++)
-    // {
-    //   for (i = 0; i < 6; i++)
-    //   {
-    //     LCD_ShowPicture(40 * i, 120 + j * 40, 40, 40, gImage_1);
-    //   }
-    // }
+    lv_table_set_cell_value_fmt(guider_ui.screen_table_1, 0, 0, "%d", rgb.r);
+    lv_table_set_cell_value_fmt(guider_ui.screen_table_2, 0, 0, "%d", rgb.g);
+    lv_table_set_cell_value_fmt(guider_ui.screen_table_3, 0, 0, "%d", rgb.b);
 
+    // lv_tick_inc(LVGL_TICK);
     lv_task_handler();
-    osDelay(20);
+    osDelay(LVGL_TICK);
   }
   /* USER CODE END LcdDisplayTask */
 }

@@ -26,6 +26,8 @@
 #define MY_DISP_HOR_RES 240
 #define MY_DISP_VER_RES 280
 
+#define LVGL_TICK 10
+
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
 

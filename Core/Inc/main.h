@@ -35,6 +35,8 @@ extern "C" {
 #include "lcd.h"
 #include "lvgl.h" 
 #include "lv_port_disp_template.h"
+#include "events_init.h"
+#include "gui_guider.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
