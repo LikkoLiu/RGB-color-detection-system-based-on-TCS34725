@@ -60,7 +60,7 @@ void Modbus_RegMap(void)
     Modbus_HoldReg[2] = (uint16_t *)&rgb.g;
     Modbus_HoldReg[3] = (uint16_t *)&rgb.b;
     Modbus_HoldReg[4] = (uint16_t *)&brightness_window.gain;
-    // Modbus_HoldReg[5] = (uint16_t *)&rgb;
+//     Modbus_HoldReg[5] = (uint16_t *)&rgb;
 //     Modbus_HoldReg[6] = (uint16_t *)&VirPwmDef8.DutyCycle;
 //     Modbus_HoldReg[7] = (uint16_t *)&VirPwmDef9.DutyCycle;
 //     Modbus_HoldReg[8] = (uint16_t *)&VirPwmDef10.DutyCycle;
