@@ -161,10 +161,10 @@ void LedFlashTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
-    vTaskSuspendAll();
+    // vTaskSuspendAll();
     switch (cycle_cnt)
     {
-    case 10:
+    case 5:
       if (adjust_gain(rgb, &brightness_window))
       {
         TCS34725_Disable();
@@ -177,11 +177,11 @@ void LedFlashTask(void const *argument)
       TCS34725_GetRawData(&rgb);
       break;
     }
-    xTaskResumeAll();
-    if (cycle_cnt == 10)
+    // xTaskResumeAll();
+    if (cycle_cnt == 5)
       cycle_cnt = 0;
     cycle_cnt++;
-    osDelay(50);
+    osDelay(10);
   }
   /* USER CODE END LedFlashTask */
 }
