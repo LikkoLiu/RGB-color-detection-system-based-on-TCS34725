@@ -78,7 +78,7 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
   *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
   *ppxIdleTaskStackBuffer = &xIdleStack[0];
   *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
-  /* place for user code */
+  /*  place for user code */
 }
 /* USER CODE END GET_IDLE_TASK_MEMORY */
 
@@ -164,7 +164,7 @@ void LedFlashTask(void const *argument)
     vTaskSuspendAll();
     switch (cycle_cnt)
     {
-    case 12:
+    case 10:
       if (adjust_gain(rgb, &brightness_window))
       {
         TCS34725_Disable();
@@ -172,14 +172,13 @@ void LedFlashTask(void const *argument)
         TCS34725_SetGain(brightness_window.gain);
         TCS34725_Enable();
       }
-      // break;
 
     default:
       TCS34725_GetRawData(&rgb);
       break;
     }
     xTaskResumeAll();
-    if (cycle_cnt == 12)
+    if (cycle_cnt == 10)
       cycle_cnt = 0;
     cycle_cnt++;
     osDelay(50);
@@ -226,7 +225,7 @@ void LcdDisplayTask(void const *argument)
     LCD_Init();
     lv_init();
     lv_port_disp_init();
-    // lv_ex_label();
+
     setup_ui(&guider_ui);
     events_init(&guider_ui);
     xTaskResumeAll();
@@ -240,7 +239,7 @@ void LcdDisplayTask(void const *argument)
     lv_table_set_cell_value_fmt(guider_ui.screen_RGB_B_Value, 0, 0, "%3d(%d)", (rgb.b * 255 / rgb.c), rgb.b);
     lv_table_set_cell_value_fmt(guider_ui.screen_Clear_Value, 0, 0, "%d", rgb.c);
     lv_table_set_cell_value_fmt(guider_ui.screen_Gain_Value, 0, 0, "LEVEL %d", brightness_window.gain);
-    lv_table_set_cell_value_fmt(guider_ui.screen_IR_Value, 0, 0, "%d / %d", rgb.IR, rgb.Lux);
+    lv_table_set_cell_value_fmt(guider_ui.screen_IR_Value, 0, 0, "%d / ***", rgb.IR);
     
     lv_led_set_color(guider_ui.screen_LED, lv_color_make((uint8_t)(rgb.r * 255 / rgb.c), (uint8_t)(rgb.g * 255 / rgb.c), (uint8_t)(rgb.b * 255 / rgb.c)));
 

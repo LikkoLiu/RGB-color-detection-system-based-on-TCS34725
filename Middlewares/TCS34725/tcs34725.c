@@ -365,13 +365,13 @@ uint8_t TCS34725_GetRawData(COLOR_RGBC *rgbc)
 		rgbc->c = TCS34725_GetChannelData(TCS34725_CDATAL);
 		rgbc->r = TCS34725_GetChannelData(TCS34725_RDATAL);
 		rgbc->g = TCS34725_GetChannelData(TCS34725_GDATAL);
-		rgbc->b = TCS34725_GetChannelData(TCS34725_BDATAL);
+		rgbc->b = TCS34725_GetChannelData(TCS34725_BDATAL);		
 
 		rgbc->IR = abs(rgbc->b + rgbc->r + rgbc->g - rgbc->c) / 2;
-		rgbc->c = rgbc->c - rgbc->IR;
-		rgbc->r = rgbc->r - rgbc->IR;
-		rgbc->g = rgbc->g - rgbc->IR;
-		rgbc->b = rgbc->b - rgbc->IR;
+		rgbc->c = (rgbc->c == 65535) ? rgbc->c : (rgbc->c - rgbc->IR);
+		rgbc->r = (rgbc->r == 65535) ? rgbc->r : (rgbc->r - rgbc->IR);
+		rgbc->g = (rgbc->g == 65535) ? rgbc->g : (rgbc->g - rgbc->IR);
+		rgbc->b = (rgbc->b == 65535) ? rgbc->b : (rgbc->b - rgbc->IR);
 
 		rgbc->Lux = ((rgbc->r * 136 + rgbc->g * 1000 - rgbc->b * 444) / 1000) / CPL;
 		// rgbc->Lux = (rgbc->r + rgbc->g + rgbc->b ) / 3;
@@ -470,7 +470,7 @@ uint8_t adjust_gain(COLOR_RGBC data, Window *brightness_window)
 		return 1;
 	}
 	// 如果当前亮度过高，减小增益
-	else if (((average_brightness > TARGET_brightness_Max) || (rgb.b > 9500) || (rgb.g > 9500) || (rgb.r > 9500)) && brightness_window->gain > 0)
+	else if (((average_brightness > TARGET_brightness_Max) || (rgb.b > 55000) || (rgb.g > 55000) || (rgb.r > 55000)) && brightness_window->gain > 0)
 	{
 		brightness_window->gain--;
 		return 1;
