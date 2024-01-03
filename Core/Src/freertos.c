@@ -111,7 +111,7 @@ void MX_FREERTOS_Init(void)
 
   /* Create the thread(s) */
   /* definition and creation of LedFlash */
-  osThreadDef(LedFlash, LedFlashTask, osPriorityBelowNormal, 0, 1024);
+  osThreadDef(LedFlash, LedFlashTask, osPriorityBelowNormal, 0, 2048);
   LedFlashHandle = osThreadCreate(osThread(LedFlash), NULL);
 
   /* definition and creation of UsbDevice */
@@ -161,7 +161,6 @@ void LedFlashTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
-    // HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
     vTaskSuspendAll();
     switch (cycle_cnt)
     {
@@ -201,6 +200,11 @@ void UsbDeviceTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
+    if(!HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7)){
+      osDelay(100);
+      if(!HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7))
+        HAL_GPIO_TogglePin(LED_FLash_GPIO_Port, LED_FLash_Pin);
+    }     
     RS485_Service();
     osDelay(50);
   }
@@ -231,20 +235,25 @@ void LcdDisplayTask(void const *argument)
   /* Infinite loop */
   for (;;)
   {
-    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_R_Value, 0, 0, "%d(%d)", rgb.r, rgb.r/255);
-    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_G_Value, 0, 0, "%d(%d)", rgb.g, rgb.g/255);
-    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_B_Value, 0, 0, "%d(%d)", rgb.b, rgb.b/255);
-    lv_table_set_cell_value_fmt(guider_ui.screen_Clear_Value, 0, 0, "%d(%d)", rgb.c, rgb.c/255);
+    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_R_Value, 0, 0, "%3d(%d)", (rgb.r * 255 / rgb.c), rgb.r);
+    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_G_Value, 0, 0, "%3d(%d)", (rgb.g * 255 / rgb.c), rgb.g);
+    lv_table_set_cell_value_fmt(guider_ui.screen_RGB_B_Value, 0, 0, "%3d(%d)", (rgb.b * 255 / rgb.c), rgb.b);
+    lv_table_set_cell_value_fmt(guider_ui.screen_Clear_Value, 0, 0, "%d", rgb.c);
     lv_table_set_cell_value_fmt(guider_ui.screen_Gain_Value, 0, 0, "LEVEL %d", brightness_window.gain);
-    lv_bar_set_value(guider_ui.screen_bar_2, (rgb.r * 100) / 65535, LV_ANIM_ON);
-    lv_bar_set_value(guider_ui.screen_bar_3, (rgb.g * 100) / 65535, LV_ANIM_ON);
-    lv_bar_set_value(guider_ui.screen_bar_4, (rgb.b * 100) / 65535, LV_ANIM_ON);
+    lv_table_set_cell_value_fmt(guider_ui.screen_IR_Value, 0, 0, "%d / %d", rgb.IR, rgb.Lux);
+    
+    lv_led_set_color(guider_ui.screen_LED, lv_color_make((uint8_t)(rgb.r * 255 / rgb.c), (uint8_t)(rgb.g * 255 / rgb.c), (uint8_t)(rgb.b * 255 / rgb.c)));
+
+    lv_bar_set_value(guider_ui.screen_bar_2, (rgb.r * 100) / rgb.c, LV_ANIM_ON);
+    lv_bar_set_value(guider_ui.screen_bar_3, (rgb.g * 100) / rgb.c, LV_ANIM_ON);
+    lv_bar_set_value(guider_ui.screen_bar_4, (rgb.b * 100) / rgb.c, LV_ANIM_ON);
 
     lv_task_handler();
     osDelay(LVGL_TICK);
   }
   /* USER CODE END LcdDisplayTask */
 }
+
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

@@ -36,6 +36,9 @@ typedef struct
 	lv_obj_t *screen_spangroup_4;
 	lv_obj_t *screen_spangroup_5;
 	lv_obj_t *screen_Gain_Value;
+	lv_obj_t *screen_LED;
+	lv_obj_t *screen_spangroup_6;
+	lv_obj_t *screen_IR_Value;
 }lv_ui;
 
 void ui_init_style(lv_style_t * style);

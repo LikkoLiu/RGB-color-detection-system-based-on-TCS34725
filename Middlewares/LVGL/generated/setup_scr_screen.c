@@ -40,19 +40,19 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_pos(ui->screen_spangroup_1, 141, 28);
 	lv_obj_set_size(ui->screen_spangroup_1, 107, 8);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_1_main_default
-	static lv_style_t style_screen_spangroup_1_main_default;
-	ui_init_style(&style_screen_spangroup_1_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_1_main_main_default
+	static lv_style_t style_screen_spangroup_1_main_main_default;
+	ui_init_style(&style_screen_spangroup_1_main_main_default);
 	
-	lv_style_set_bg_opa(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_border_width(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_radius(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_pad_top(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_pad_right(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_pad_bottom(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_pad_left(&style_screen_spangroup_1_main_default, 0);
-	lv_style_set_shadow_width(&style_screen_spangroup_1_main_default, 0);
-	lv_obj_add_style(ui->screen_spangroup_1, &style_screen_spangroup_1_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_border_width(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_1_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_1_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_1, &style_screen_spangroup_1_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_spangroup_refr_mode(ui->screen_spangroup_1);
 
 	//Write codes screen_line_1
@@ -83,19 +83,19 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_pos(ui->screen_spangroup_2, 141, 73);
 	lv_obj_set_size(ui->screen_spangroup_2, 107, 8);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_2_main_default
-	static lv_style_t style_screen_spangroup_2_main_default;
-	ui_init_style(&style_screen_spangroup_2_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_2_main_main_default
+	static lv_style_t style_screen_spangroup_2_main_main_default;
+	ui_init_style(&style_screen_spangroup_2_main_main_default);
 	
-	lv_style_set_bg_opa(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_border_width(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_radius(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_pad_top(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_pad_right(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_pad_bottom(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_pad_left(&style_screen_spangroup_2_main_default, 0);
-	lv_style_set_shadow_width(&style_screen_spangroup_2_main_default, 0);
-	lv_obj_add_style(ui->screen_spangroup_2, &style_screen_spangroup_2_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_border_width(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_2_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_2_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_2, &style_screen_spangroup_2_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_spangroup_refr_mode(ui->screen_spangroup_2);
 
 	//Write codes screen_line_2
@@ -177,19 +177,19 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_pos(ui->screen_spangroup_3, 141, 118);
 	lv_obj_set_size(ui->screen_spangroup_3, 107, 8);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_3_main_default
-	static lv_style_t style_screen_spangroup_3_main_default;
-	ui_init_style(&style_screen_spangroup_3_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_3_main_main_default
+	static lv_style_t style_screen_spangroup_3_main_main_default;
+	ui_init_style(&style_screen_spangroup_3_main_main_default);
 	
-	lv_style_set_bg_opa(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_border_width(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_radius(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_pad_top(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_pad_right(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_pad_bottom(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_pad_left(&style_screen_spangroup_3_main_default, 0);
-	lv_style_set_shadow_width(&style_screen_spangroup_3_main_default, 0);
-	lv_obj_add_style(ui->screen_spangroup_3, &style_screen_spangroup_3_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_border_width(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_3_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_3_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_3, &style_screen_spangroup_3_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_spangroup_refr_mode(ui->screen_spangroup_3);
 
 	//Write codes screen_RGB_R_Value
@@ -303,7 +303,7 @@ void setup_scr_screen(lv_ui *ui)
 	lv_table_set_col_cnt(ui->screen_Clear_Value,1);
 	lv_table_set_row_cnt(ui->screen_Clear_Value,1);
 	lv_table_set_cell_value(ui->screen_Clear_Value,0,0,"256");
-	lv_obj_set_pos(ui->screen_Clear_Value, 15, 175);
+	lv_obj_set_pos(ui->screen_Clear_Value, 15, 235);
 	lv_obj_set_scrollbar_mode(ui->screen_Clear_Value, LV_SCROLLBAR_MODE_OFF);
 
 	//Write style for screen_Clear_Value, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -339,22 +339,22 @@ void setup_scr_screen(lv_ui *ui)
 	lv_style_set_text_color(&screen_spangroup_4_span->style, lv_color_hex(0x909090));
 	lv_style_set_text_decor(&screen_spangroup_4_span->style, LV_TEXT_DECOR_NONE);
 	lv_style_set_text_font(&screen_spangroup_4_span->style, &lv_font_montserratMedium_10);
-	lv_obj_set_pos(ui->screen_spangroup_4, 15, 165);
-	lv_obj_set_size(ui->screen_spangroup_4, 107, 8);
+	lv_obj_set_pos(ui->screen_spangroup_4, 15, 225);
+	lv_obj_set_size(ui->screen_spangroup_4, 133, 8);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_4_main_default
-	static lv_style_t style_screen_spangroup_4_main_default;
-	ui_init_style(&style_screen_spangroup_4_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_4_main_main_default
+	static lv_style_t style_screen_spangroup_4_main_main_default;
+	ui_init_style(&style_screen_spangroup_4_main_main_default);
 	
-	lv_style_set_bg_opa(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_border_width(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_radius(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_pad_top(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_pad_right(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_pad_bottom(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_pad_left(&style_screen_spangroup_4_main_default, 0);
-	lv_style_set_shadow_width(&style_screen_spangroup_4_main_default, 0);
-	lv_obj_add_style(ui->screen_spangroup_4, &style_screen_spangroup_4_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_border_width(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_4_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_4_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_4, &style_screen_spangroup_4_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_spangroup_refr_mode(ui->screen_spangroup_4);
 
 	//Write codes screen_spangroup_5
@@ -369,22 +369,22 @@ void setup_scr_screen(lv_ui *ui)
 	lv_style_set_text_color(&screen_spangroup_5_span->style, lv_color_hex(0x909090));
 	lv_style_set_text_decor(&screen_spangroup_5_span->style, LV_TEXT_DECOR_NONE);
 	lv_style_set_text_font(&screen_spangroup_5_span->style, &lv_font_montserratMedium_10);
-	lv_obj_set_pos(ui->screen_spangroup_5, 15, 205);
+	lv_obj_set_pos(ui->screen_spangroup_5, 15, 165);
 	lv_obj_set_size(ui->screen_spangroup_5, 107, 8);
 
-	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_5_main_default
-	static lv_style_t style_screen_spangroup_5_main_default;
-	ui_init_style(&style_screen_spangroup_5_main_default);
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_5_main_main_default
+	static lv_style_t style_screen_spangroup_5_main_main_default;
+	ui_init_style(&style_screen_spangroup_5_main_main_default);
 	
-	lv_style_set_bg_opa(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_border_width(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_radius(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_pad_top(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_pad_right(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_pad_bottom(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_pad_left(&style_screen_spangroup_5_main_default, 0);
-	lv_style_set_shadow_width(&style_screen_spangroup_5_main_default, 0);
-	lv_obj_add_style(ui->screen_spangroup_5, &style_screen_spangroup_5_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_style_set_border_width(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_5_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_5_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_5, &style_screen_spangroup_5_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
 	lv_spangroup_refr_mode(ui->screen_spangroup_5);
 
 	//Write codes screen_Gain_Value
@@ -392,7 +392,7 @@ void setup_scr_screen(lv_ui *ui)
 	lv_table_set_col_cnt(ui->screen_Gain_Value,1);
 	lv_table_set_row_cnt(ui->screen_Gain_Value,1);
 	lv_table_set_cell_value(ui->screen_Gain_Value,0,0,"256");
-	lv_obj_set_pos(ui->screen_Gain_Value, 15, 215);
+	lv_obj_set_pos(ui->screen_Gain_Value, 15, 175);
 	lv_obj_set_scrollbar_mode(ui->screen_Gain_Value, LV_SCROLLBAR_MODE_OFF);
 
 	//Write style for screen_Gain_Value, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -415,6 +415,72 @@ void setup_scr_screen(lv_ui *ui)
 	lv_obj_set_style_pad_bottom(ui->screen_Gain_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_left(ui->screen_Gain_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
 	lv_obj_set_style_pad_right(ui->screen_Gain_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+
+	//Write codes screen_LED
+	ui->screen_LED = lv_led_create(ui->screen);
+	lv_led_set_brightness(ui->screen_LED, 255);
+	lv_led_set_color(ui->screen_LED, lv_color_hex(0xffffff));
+	lv_obj_set_pos(ui->screen_LED, 141, 186);
+	lv_obj_set_size(ui->screen_LED, 60, 60);
+
+	//Write codes screen_spangroup_6
+	ui->screen_spangroup_6 = lv_spangroup_create(ui->screen);
+	lv_spangroup_set_align(ui->screen_spangroup_6, LV_TEXT_ALIGN_LEFT);
+	lv_spangroup_set_overflow(ui->screen_spangroup_6, LV_SPAN_OVERFLOW_CLIP);
+	lv_spangroup_set_mode(ui->screen_spangroup_6, LV_SPAN_MODE_BREAK);
+	//create spans
+	lv_span_t *screen_spangroup_6_span;
+	screen_spangroup_6_span = lv_spangroup_new_span(ui->screen_spangroup_6);
+	lv_span_set_text(screen_spangroup_6_span, "InFrared & Lux");
+	lv_style_set_text_color(&screen_spangroup_6_span->style, lv_color_hex(0x909090));
+	lv_style_set_text_decor(&screen_spangroup_6_span->style, LV_TEXT_DECOR_NONE);
+	lv_style_set_text_font(&screen_spangroup_6_span->style, &lv_font_montserratMedium_10);
+	lv_obj_set_pos(ui->screen_spangroup_6, 15, 195);
+	lv_obj_set_size(ui->screen_spangroup_6, 133, 8);
+
+	//Write style state: LV_STATE_DEFAULT for &style_screen_spangroup_6_main_main_default
+	static lv_style_t style_screen_spangroup_6_main_main_default;
+	ui_init_style(&style_screen_spangroup_6_main_main_default);
+	
+	lv_style_set_border_width(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_radius(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_bg_opa(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_pad_top(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_pad_right(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_pad_bottom(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_pad_left(&style_screen_spangroup_6_main_main_default, 0);
+	lv_style_set_shadow_width(&style_screen_spangroup_6_main_main_default, 0);
+	lv_obj_add_style(ui->screen_spangroup_6, &style_screen_spangroup_6_main_main_default, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_spangroup_refr_mode(ui->screen_spangroup_6);
+
+	//Write codes screen_IR_Value
+	ui->screen_IR_Value = lv_table_create(ui->screen);
+	lv_table_set_col_cnt(ui->screen_IR_Value,1);
+	lv_table_set_row_cnt(ui->screen_IR_Value,1);
+	lv_table_set_cell_value(ui->screen_IR_Value,0,0,"256");
+	lv_obj_set_pos(ui->screen_IR_Value, 15, 205);
+	lv_obj_set_scrollbar_mode(ui->screen_IR_Value, LV_SCROLLBAR_MODE_OFF);
+
+	//Write style for screen_IR_Value, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_pad_top(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_radius(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+	lv_obj_set_style_shadow_width(ui->screen_IR_Value, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+	//Write style for screen_IR_Value, Part: LV_PART_ITEMS, State: LV_STATE_DEFAULT.
+	lv_obj_set_style_text_color(ui->screen_IR_Value, lv_color_hex(0xffffff), LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(ui->screen_IR_Value, &lv_font_Acme_Regular_14, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_text_align(ui->screen_IR_Value, LV_TEXT_ALIGN_LEFT, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_bg_opa(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_border_width(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_top(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_bottom(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_left(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
+	lv_obj_set_style_pad_right(ui->screen_IR_Value, 0, LV_PART_ITEMS|LV_STATE_DEFAULT);
 
 	//Update current screen layout.
 	lv_obj_update_layout(ui->screen);

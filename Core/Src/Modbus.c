@@ -52,15 +52,15 @@ uint32_t testData29 = 500, testData30 = 600, testData31 = 700, testData32 = 800;
  2. 参数：无
  3. 返回值：无
 */
-// void Modbus_RegMap(void)
-// {
-//     // 保持寄存器指针指向
-//     Modbus_HoldReg[0] = (uint16_t *)&VirPwmDef2.DutyCycle;
-//     Modbus_HoldReg[1] = (uint16_t *)&VirPwmDef3.DutyCycle; 
-//     Modbus_HoldReg[2] = (uint16_t *)&VirPwmDef4.DutyCycle;
-//     Modbus_HoldReg[3] = (uint16_t *)&VirPwmDef5.DutyCycle;
-//     Modbus_HoldReg[4] = (uint16_t *)&VirPwmDef6.DutyCycle;
-//     Modbus_HoldReg[5] = (uint16_t *)&VirPwmDef7.DutyCycle;
+void Modbus_RegMap(void)
+{
+    // 保持寄存器指针指向
+    Modbus_HoldReg[0] = (uint16_t *)&rgb.c;
+    Modbus_HoldReg[1] = (uint16_t *)&rgb.r; 
+    Modbus_HoldReg[2] = (uint16_t *)&rgb.g;
+    Modbus_HoldReg[3] = (uint16_t *)&rgb.b;
+    Modbus_HoldReg[4] = (uint16_t *)&brightness_window.gain;
+    // Modbus_HoldReg[5] = (uint16_t *)&rgb;
 //     Modbus_HoldReg[6] = (uint16_t *)&VirPwmDef8.DutyCycle;
 //     Modbus_HoldReg[7] = (uint16_t *)&VirPwmDef9.DutyCycle;
 //     Modbus_HoldReg[8] = (uint16_t *)&VirPwmDef10.DutyCycle;
@@ -85,7 +85,7 @@ uint32_t testData29 = 500, testData30 = 600, testData31 = 700, testData32 = 800;
 //     Modbus_HoldReg[27] = (uint16_t *)&VirPwmDef29.DutyCycle;
 //     Modbus_HoldReg[28] = (uint16_t *)&VirPwmDef30.DutyCycle;
 //     Modbus_HoldReg[29] = (uint16_t *)&VirPwmDef31.DutyCycle;
-// }
+}
 
 void RS485_Service(void)
 {
@@ -138,7 +138,7 @@ void RS485_Service(void)
 
                         case 06: // 写单个保持寄存器
                         {
-                            Modbus_06_Solve();
+                            // Modbus_06_Solve();
                             break;
                         }
                         case 15: // 写多个输出开关量
@@ -149,7 +149,7 @@ void RS485_Service(void)
 
                         case 16: // 写多个保持寄存器
                         {
-                            Modbus_16_Solve();
+                            // Modbus_16_Solve();
                             break;
                         }
                         }
